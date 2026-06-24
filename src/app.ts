@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import twoPhaseRoutes from './routes/twoPhase.routes';
+import crudRoutes from './routes/crud.routes';
 import { errorHandler } from './middleware/errorHandler';
 
 dotenv.config();
@@ -21,6 +22,9 @@ app.get('/health', (_req: Request, res: Response) => {
 
 // 2PC Routes
 app.use('/api/2pc', twoPhaseRoutes);
+
+// CRUD Routes
+app.use('/api', crudRoutes);
 
 // Error handler (harus di akhir)
 app.use(errorHandler);
