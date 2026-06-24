@@ -1,5 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
+import twoPhaseRoutes from './routes/twoPhase.routes';
+import { errorHandler } from './middleware/errorHandler';
 
 dotenv.config();
 
@@ -17,8 +19,10 @@ app.get('/health', (_req: Request, res: Response) => {
   });
 });
 
-// Routes — akan diimport di Phase 04
-// import twoPhaseRoutes from './routes/twoPhase.routes';
-// app.use('/api/2pc', twoPhaseRoutes);
+// 2PC Routes
+app.use('/api/2pc', twoPhaseRoutes);
+
+// Error handler (harus di akhir)
+app.use(errorHandler);
 
 export default app;
